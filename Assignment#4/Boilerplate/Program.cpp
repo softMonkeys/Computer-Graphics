@@ -45,6 +45,7 @@ void Program::setupWindow() {
 	if (!glfwInit()) {
 		std::cout << "ERROR: GLFW failed to initialize, TERMINATING" << std::endl;
 		return;
+
 	}
 
 	//Set the custom error callback function

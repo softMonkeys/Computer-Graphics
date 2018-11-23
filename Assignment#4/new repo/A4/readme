@@ -1,0 +1,22 @@
+Authors: BenKun Chen | Heavenel Cerna
+UCID: 30005337 | 30019914
+
+- - [Controls] - -
+
+[Change Scene]
+1 - Scene 1
+2 - Scene 2
+3 - Custom Scene
+
+UP - Increase FOV
+DOWN - Decrease FOV
+
+- - [Late Days Used == 0] - -
+
+- - [Additional information] - - 
+Platform - mockbuild@bkernel02.phx2.fedoraproject.org
+Compiler - gcc version 8.1.1 20180712 (Red Hat 8.1.1-5) (GCC)
+
+[IMPORTANT!]
+!!In order to utilize unique_ptr we compiled with c++11 flag!!
+
