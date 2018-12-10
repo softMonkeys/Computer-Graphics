@@ -26,11 +26,11 @@
 Scene::Scene(RenderingEngine* renderer, GLFWwindow* window) : renderer(renderer), window(window) {
 	cmr.theta = 0.0f;
 	cmr.phi = 0.0f;
-	cmr.r = 15.0f;
+	cmr.r = 20.0f;
 
 	readFile();
 
-	// objects.clear();
+	objects.clear();
 
 
 
@@ -53,6 +53,7 @@ void Scene::displayScene() {
 }
 
 void Scene::sun(){
+	sunSphere.setState(1);
 	InitializeTexture(&sunSphere.texture, "8k_sun.jpg", GL_TEXTURE_2D);
 
 
@@ -60,9 +61,6 @@ void Scene::sun(){
 	if(renderer->CheckGLErrors()) {
 		std::cout << "Texture creation failed" << std::endl;
 	}
-
-	std::cout << out_vertices.size() << std::endl;
-	std::cout << out_uvs.size() << std::endl;
 
 	for(int i = 0; i < out_vertices.size(); i++){
 		glm::vec3 vertex = out_vertices[i];
@@ -92,6 +90,7 @@ void Scene::sun(){
 
 
 void Scene::earth(){
+	earthSphere.setState(2);
 	InitializeTexture(&earthSphere.texture, "8k_earth_daymap.jpg", GL_TEXTURE_2D);
 
 
@@ -101,14 +100,11 @@ void Scene::earth(){
 
 	for(int i = 0; i < out_vertices.size(); i++){
 		glm::vec3 vertex = out_vertices[i];
-		earthSphere.verts.push_back(glm::vec3(vertex.x * 0.5f, vertex.y* 0.5f, vertex.z * 0.5f - 3.0f));
+		earthSphere.verts.push_back(glm::vec3(vertex.x * 0.5f, vertex.y * 0.5f, vertex.z * 0.5f));
 
 	}
 
 	earthSphere.drawMode = GL_TRIANGLES;
-
-	std::cout << out_vertices.size() << std::endl;
-		std::cout << out_uvs.size() << std::endl;
 
 	for(int i = 0; i < out_uvs.size(); i++){
 		glm::vec2 vertex = out_uvs[i];
@@ -131,6 +127,7 @@ void Scene::earth(){
 
 
 void Scene::moon(){
+	moonSphere.setState(3);
 	InitializeTexture(&moonSphere.texture, "8k_moon.jpg", GL_TEXTURE_2D);
 
 
@@ -140,14 +137,13 @@ void Scene::moon(){
 
 	for(int i = 0; i < out_vertices.size(); i++){
 		glm::vec3 vertex = out_vertices[i];
-		moonSphere.verts.push_back(glm::vec3(vertex.x * 0.2f, vertex.y* 0.2f, vertex.z * 0.2f - 2.0f));
+		moonSphere.verts.push_back(glm::vec3(vertex.x * 0.15f, vertex.y * 0.15f, vertex.z * 0.15f - 1.f));
 
 	}
 
 	moonSphere.drawMode = GL_TRIANGLES;
 
-	std::cout << out_vertices.size() << std::endl;
-		std::cout << out_uvs.size() << std::endl;
+	std::cout << out_normals.size() << std::endl;
 
 	for(int i = 0; i < out_uvs.size(); i++){
 		glm::vec2 vertex = out_uvs[i];
@@ -168,6 +164,7 @@ void Scene::moon(){
 
 
 void Scene::mars(){
+	marsSphere.setState(4);
 	InitializeTexture(&marsSphere.texture, "8k_mars.jpg", GL_TEXTURE_2D);
 
 
@@ -177,14 +174,11 @@ void Scene::mars(){
 
 	for(int i = 0; i < out_vertices.size(); i++){
 		glm::vec3 vertex = out_vertices[i];
-		marsSphere.verts.push_back(glm::vec3(vertex.x * 0.6f, vertex.y* 0.6f, vertex.z * 0.6f - 4.5f));
+		marsSphere.verts.push_back(glm::vec3(vertex.x * 0.6f, vertex.y* 0.6f, vertex.z * 0.6f));
 
 	}
 
 	marsSphere.drawMode = GL_TRIANGLES;
-
-	std::cout << out_vertices.size() << std::endl;
-		std::cout << out_uvs.size() << std::endl;
 
 	for(int i = 0; i < out_uvs.size(); i++){
 		glm::vec2 vertex = out_uvs[i];
@@ -215,14 +209,12 @@ void Scene::milky(){
 
 	for(int i = 0; i < out_vertices.size(); i++){
 		glm::vec3 vertex = out_vertices[i];
-		milkySphere.verts.push_back(glm::vec3(vertex.x * 20.0f, vertex.y* 20.0f, vertex.z * 20.0f));
+		milkySphere.verts.push_back(glm::vec3(vertex.x * 50.0f, vertex.y * 50.0f, vertex.z * 50.0f));
 
 	}
 
 	milkySphere.drawMode = GL_TRIANGLES;
 
-	std::cout << out_vertices.size() << std::endl;
-		std::cout << out_uvs.size() << std::endl;
 
 	for(int i = 0; i < out_uvs.size(); i++){
 		glm::vec2 vertex = out_uvs[i];

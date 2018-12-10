@@ -23,6 +23,14 @@ public:
 	Geometry();
 	virtual ~Geometry();
 
+	void setState(int value){
+		state = value;
+	}
+
+	int getState() const{
+		return state;
+	}
+
 	//Data structures for storing vertices, normals colors and uvs
 	std::vector<glm::vec3> verts;
 	std::vector<glm::vec3> normals;
@@ -40,6 +48,8 @@ public:
 	GLuint drawMode;
 
 	MyTexture texture;
+
+	int state;
 };
 
 #endif /* GEOMETRY_H_ */

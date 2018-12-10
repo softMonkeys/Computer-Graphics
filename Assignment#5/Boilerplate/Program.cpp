@@ -40,6 +40,7 @@ void Program::start() {
 	s->mars();
 	s->milky();
 
+
 	//Main render loop
 	while (!glfwWindowShouldClose(window)) {
 		scene->displayScene();
@@ -133,12 +134,25 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 		printf("phi: %f\n", s->cmr.phi);
 	}
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
-		s->cmr.theta_up();
-		printf("theta: %f\n", s->cmr.theta);
+		float temp = p->renderingEngine->getSpeed();
+		p->renderingEngine->setSpeed(temp + 5.f);
 	}
 	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-		s->cmr.theta_down();
-		printf("theta: %f\n", s->cmr.theta);
+		float temp = p->renderingEngine->getSpeed();
+		if(temp - 5.f > 0.f){
+			p->renderingEngine->setSpeed(temp - 5.f);
+		}
+	}
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS){
+		if(p->flag == 0){
+			p->store = p->renderingEngine->getSpeed();
+			p->renderingEngine->setSpeed(0.f);
+			p->flag = 1;
+		}else{
+			p->renderingEngine->setSpeed(p->store);
+			p->flag = 0;
+		}
+
 	}
 }
 

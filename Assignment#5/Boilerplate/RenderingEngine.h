@@ -24,6 +24,14 @@ public:
 	RenderingEngine();
 	virtual ~RenderingEngine();
 
+	void setSpeed(float value){
+		speed = value;
+	}
+
+	float getSpeed(){
+		return speed;
+	}
+
 	//Renders each object
 	void RenderScene(const std::vector<Geometry>& objects, GLFWwindow* window, Carmera cmr);
 
@@ -37,6 +45,9 @@ public:
 
 	//Pointer to the current shader program being used to render
 	GLuint shaderProgram;
+
+	float speed = 50.f;
+	float time;
 };
 
 #endif /* RENDERINGENGINE_H_ */

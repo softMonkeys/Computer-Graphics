@@ -27,6 +27,8 @@ RenderingEngine::~RenderingEngine() {
 }
 
 void RenderingEngine::RenderScene(const std::vector<Geometry>& objects, GLFWwindow* window, Carmera cmr) {
+	time += speed;
+
 	//Clears the screen to a dark grey background
 
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
@@ -68,7 +70,52 @@ void RenderingEngine::RenderScene(const std::vector<Geometry>& objects, GLFWwind
 
 
 
+
 	for (const Geometry& g : objects) {
+		glm::mat4 self_rotation(1.f);
+		glm::mat4 orbit_rotation(1.f);
+		// Sun
+		if(g.getState() == 1){
+			glm::mat4 ModelMatrix(1.f);
+			float degree = fmod(time / 150.f, 360);
+			self_rotation = glm::rotate(self_rotation, glm::radians(degree), glm::vec3(0.f, 1.f, 0.f));
+		}
+		// Earth
+		if(g.getState() == 2){
+
+			glm::mat4 ModelMatrix(1.f);
+			float degree1 = fmod(time / 25.f, 360);
+			float degree2 = fmod(time / 365.f, 360);
+			self_rotation = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, -6.f));
+			self_rotation = glm::rotate(self_rotation, glm::radians(-23.4f), glm::vec3(1.f, 0.f, 0.f));
+			self_rotation = glm::rotate(self_rotation, glm::radians(degree1), glm::vec3(0.f, 1.f, 0.f));
+			orbit_rotation = glm::rotate(ModelMatrix, glm::radians(degree2), glm::vec3(0.f, 1.f, 0.f));
+		}
+		// Moon
+		if(g.getState() == 3){
+			glm::mat4 ModelMatrix(1.f);
+			float degree1 = fmod(time / 27.321, 360);
+			float degree2 = fmod(time / 365.f, 360);
+			self_rotation = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, -6.f));
+			self_rotation = glm::rotate(self_rotation, glm::radians(degree1), glm::vec3(0.f, 1.f, 0.f));
+			orbit_rotation = glm::rotate(ModelMatrix, glm::radians(degree2), glm::vec3(0.f, 1.f, 0.f));
+		}
+		// Mars
+		if(g.getState() == 4){
+			glm::mat4 ModelMatrix(1.f);
+			float degree1 = fmod(time /30.f, 360);
+			float degree2 = fmod(time /686.492, 360);
+			self_rotation = glm::translate(ModelMatrix, glm::vec3(8.f, 0.f, -8.f));
+			self_rotation = glm::rotate(self_rotation, glm::radians(degree1), glm::vec3(0.f, 1.f, 0.f));
+			orbit_rotation = glm::rotate(ModelMatrix, glm::radians(degree2), glm::vec3(0.f, 1.f, 0.f));
+		}
+		GLuint self_id = glGetUniformLocation(shaderProgram, "self_rotation");
+		glUniformMatrix4fv(self_id, 1, GL_FALSE, &self_rotation[0][0]);
+
+		GLuint orbit_id = glGetUniformLocation(shaderProgram, "orbit_rotation");
+		glUniformMatrix4fv(orbit_id, 1, GL_FALSE, &orbit_rotation[0][0]);
+
+
 		glUseProgram(shaderProgram);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, g.texture.textureID);

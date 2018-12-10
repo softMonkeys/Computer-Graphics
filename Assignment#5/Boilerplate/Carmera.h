@@ -40,7 +40,7 @@ class Carmera{
         }
 
         void r_up() {
-            if (r <= 40) {
+            if (r <= 22) {
                 r += 1;
             }
         }

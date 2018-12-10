@@ -12,6 +12,8 @@ layout(location = 0) in vec3 VertexPosition;
 layout(location = 1) in vec2 VertexUV;
 
 uniform mat4 MVP;
+uniform mat4 self_rotation;
+uniform mat4 orbit_rotation;
 
 // output to be interpolated between vertices and passed to the fragment stage
 out vec3 Colour;
@@ -21,7 +23,7 @@ out vec2 uv;
 void main()
 {
     // assign vertex position without modification
-    gl_Position =  MVP * vec4(VertexPosition, 1.0);
+    gl_Position =  MVP * orbit_rotation * self_rotation * vec4(VertexPosition, 1.0);
 
     // assign output colour to be interpolated
 	z = VertexPosition[1];

@@ -7,7 +7,6 @@
 
 #ifndef PROGRAM_H_
 #define PROGRAM_H_
-
 //Forward declaration of classes
 //(note this is necessary because these are pointers and it allows the #include to appear in the .cpp file)
 struct GLFWwindow;
@@ -42,9 +41,13 @@ public:
 	float lastx = 0.0f;
 	float lasty = 0.0f;
 
+	RenderingEngine* renderingEngine;
+
+	float store;
+	int flag = 0;
 private:
 	GLFWwindow * window;
-	RenderingEngine* renderingEngine;
+
 	Scene* scene;
 	int mouseClicked = 0; // 0 - false, 1 - true
 };
