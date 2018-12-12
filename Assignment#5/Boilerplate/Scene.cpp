@@ -32,15 +32,6 @@ Scene::Scene(RenderingEngine* renderer, GLFWwindow* window) : renderer(renderer)
 
 	objects.clear();
 
-
-
-//	earth();
-//	sun();
-
-//	objects.push_back(sunSphere);
-//	objects.push_back(earthSphere);
-
-
 }
 
 Scene::~Scene() {
@@ -197,7 +188,113 @@ void Scene::mars(){
 
 }
 
+void Scene::mercury(){
+	mercurySphere.setState(5);
+	InitializeTexture(&mercurySphere.texture, "8k_mercury.jpg", GL_TEXTURE_2D);
 
+
+
+	if(renderer->CheckGLErrors()) {
+		std::cout << "Texture creation failed" << std::endl;
+	}
+
+	for(int i = 0; i < out_vertices.size(); i++){
+		glm::vec3 vertex = out_vertices[i];
+		mercurySphere.verts.push_back(glm::vec3(vertex.x * 0.2f, vertex.y * 0.2f, vertex.z * 0.2f));
+
+	}
+
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	mercurySphere.drawMode = GL_TRIANGLES;
+
+	for(int i = 0; i < out_uvs.size(); i++){
+		glm::vec2 vertex = out_uvs[i];
+		mercurySphere.uvs.push_back(glm::vec2(vertex.x, vertex.y));
+	}
+
+	//Construct vao and vbos for the triangle
+	RenderingEngine::assignBuffers(mercurySphere);
+
+	//Send the triangle data to the GPU
+	//Must be done every time the triangle is modified in any way, ex. verts, colors, normals, uvs, etc.
+	RenderingEngine::setBufferData(mercurySphere);
+
+	//Add the triangle to the scene objects
+	objects.push_back(mercurySphere);
+
+}
+
+void Scene::venus(){
+	venusSphere.setState(6);
+	InitializeTexture(&venusSphere.texture, "8k_venus_surface.jpg", GL_TEXTURE_2D);
+
+
+
+	if(renderer->CheckGLErrors()) {
+		std::cout << "Texture creation failed" << std::endl;
+	}
+
+	for(int i = 0; i < out_vertices.size(); i++){
+		glm::vec3 vertex = out_vertices[i];
+		venusSphere.verts.push_back(glm::vec3(vertex.x * 0.5f, vertex.y * 0.5f, vertex.z * 0.5f));
+
+	}
+
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	venusSphere.drawMode = GL_TRIANGLES;
+
+	for(int i = 0; i < out_uvs.size(); i++){
+		glm::vec2 vertex = out_uvs[i];
+		venusSphere.uvs.push_back(glm::vec2(vertex.x, vertex.y));
+	}
+
+	//Construct vao and vbos for the triangle
+	RenderingEngine::assignBuffers(venusSphere);
+
+	//Send the triangle data to the GPU
+	//Must be done every time the triangle is modified in any way, ex. verts, colors, normals, uvs, etc.
+	RenderingEngine::setBufferData(venusSphere);
+
+	//Add the triangle to the scene objects
+	objects.push_back(venusSphere);
+
+}
+
+void Scene::jupitor(){
+	jupitorSphere.setState(7);
+	InitializeTexture(&jupitorSphere.texture, "8k_jupiter.jpg", GL_TEXTURE_2D);
+
+
+
+	if(renderer->CheckGLErrors()) {
+		std::cout << "Texture creation failed" << std::endl;
+	}
+
+	for(int i = 0; i < out_vertices.size(); i++){
+		glm::vec3 vertex = out_vertices[i];
+		jupitorSphere.verts.push_back(glm::vec3(vertex.x * 0.5f, vertex.y * 0.5f, vertex.z * 0.5f));
+
+	}
+
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	jupitorSphere.drawMode = GL_TRIANGLES;
+
+	for(int i = 0; i < out_uvs.size(); i++){
+		glm::vec2 vertex = out_uvs[i];
+		jupitorSphere.uvs.push_back(glm::vec2(vertex.x, vertex.y));
+	}
+
+	//Construct vao and vbos for the triangle
+	RenderingEngine::assignBuffers(jupitorSphere);
+
+	//Send the triangle data to the GPU
+	//Must be done every time the triangle is modified in any way, ex. verts, colors, normals, uvs, etc.
+	RenderingEngine::setBufferData(jupitorSphere);
+
+	//Add the triangle to the scene objects
+	objects.push_back(jupitorSphere);
+
+}
 
 void Scene::milky(){
 	InitializeTexture(&milkySphere.texture, "8k_stars_milky_way.jpg", GL_TEXTURE_2D);

@@ -7,9 +7,11 @@
 #version 410
 
 // interpolated colour received from vertex stage
-in vec3 Colour;
 in float z;
 in vec2 uv;
+in vec3 n;
+in vec3 l;
+// in vec3 sun;
 
 uniform sampler2D imageTexture;
 
@@ -18,6 +20,17 @@ out vec4 FragmentColour;
 
 void main(void)
 {
-    // write colour output without modification
-    FragmentColour = texture(imageTexture, uv);
+    //if (sun.x == 0.0f) {
+    //    vec4 ca = vec4(0.3, 0.3, 0.3, 0.0);
+    //   vec4 cl = vec4(1.0, 1.0, 1.0, 0.0);
+    //    // write colour output without modification
+    //    vec4 L;
+
+    //    L = ca + cl * max(0, dot(n,l));
+
+    //    FragmentColour =  texture(imageTexture, uv) * L;
+    //}
+    //else {
+        FragmentColour =  texture(imageTexture, uv);
+    //}
 }

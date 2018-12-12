@@ -34,6 +34,9 @@ public:
 	void sun();
 	void moon();
 	void mars();
+	void mercury();
+	void venus();
+	void jupitor();
 	void milky();
 
 private:
@@ -44,6 +47,9 @@ private:
 	Geometry earthSphere;
 	Geometry moonSphere;
 	Geometry marsSphere;
+	Geometry mercurySphere;
+	Geometry venusSphere;
+	Geometry jupitorSphere;
 	Geometry milkySphere;
 
 	std::vector<Geometry> objects;

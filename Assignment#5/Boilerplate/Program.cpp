@@ -38,6 +38,9 @@ void Program::start() {
 	s->earth();
 	s->moon();
 	s->mars();
+	s->mercury();
+	s->venus();
+	s->jupitor();
 	s->milky();
 
 
